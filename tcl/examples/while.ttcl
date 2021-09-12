@@ -1,0 +1,5 @@
+"testing while:"
+    ++++++++++   {>+++++++<-}  
+        "10"            "7"  "while cell0 nonzero, add 7 to cell1."
+    >O
+    "output (should be ASCII 70)"
