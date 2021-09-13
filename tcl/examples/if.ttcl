@@ -1,5 +1,4 @@
 "testing branching: "
     >+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<[>OOO]+O[OOO]
-
-"some commands"
---[++"do stuff if cell == 2"]
+     "set cell1 to ASCII A."                                           "if cell0==0, print AAA"
+                                                                       "then print B and if cell1==0 print it"    
