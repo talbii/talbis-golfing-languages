@@ -126,19 +126,17 @@ class TCLObject:
 
         i: int = 0
 
-        branch_begins = []
+        while_loops_stack = []
 
         while True:
             if(data[i] == "{"):
-                branch_begins.append(i)
+                while_loops_stack.append(i)
 
             if(data[i] == "}"):
                 o.do_operation(data[i])
                 if(o.Get != 0): # not zero, continue while
-                    i = branch_begins.pop()
+                    i = while_loops_stack.pop()
                     increment = False
-                else:
-                    i += 1
 
             if(not o.do_operation(data[i])): return # Exit if do_operations returns False (= error occurred.)
             
