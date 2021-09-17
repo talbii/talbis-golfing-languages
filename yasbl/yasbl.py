@@ -69,7 +69,7 @@ class YASBL:
             "+": self.Add,
             "⊕": self.Sum,
             "±": self.SumAlternating,
-            "S": self.SumSquare,
+            "⊞": self.SumSquare,
 
             "-": self.Unaryminus,
             "—": self.Stackminus,
