@@ -6,16 +6,15 @@
 class StackfuckFunc {
 public:
     virtual ~StackfuckFunc() {}
-    virtual void operator() (Interpreter& i) = 0;
+    virtual void operator() (Interpreter& i) const = 0;
 };
 
 class Interpreter {
 private:
     friend class StackfuckFunc;
     std::stack<long> program_stack;
-    StackfuckFunc* functions[];
 public:
-    static const std::map<char, int> DefinedFunctions;
+    static const std::map<char, StackfuckFunc*> DefinedFunctions;
     ~Interpreter() { delete[] funcs; }
 
     void run_command(char); 
