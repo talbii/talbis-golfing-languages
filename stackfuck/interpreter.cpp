@@ -1,63 +1,39 @@
 #include "interpreter.h"
-#include <stdio.h>
+#include "basefunctors.h"
+#include <stdexcept>
 
-namespace stackfuck_builtin {
-    class Add : public StackfuckFunc {
-    public:
-        virtual void operator() (Interpreter& i) const {
-            i.program_stack.top()++;
-        }
-    };
+unsigned int Interpreter::interpreter_instances = 0;
 
-    class Subtract : public StackfuckFunc {
-    public:
-        virtual void operator() (Interpreter& i) const {
-            i.program_stack.top()--;
-        }
-    };
-
-    class Push_next : public StackfuckFunc {
-    public:
-        virtual void operator() (Interpreter& i) const {
-            i.program_stack.push(0);
-        }
-    };
-
-    class Input : public StackfuckFunc {
-    public:
-        virtual void operator() (Interpreter& i) const {
-            i.program_stack.push(getchar());
-        }
-    };
-
-    class InputNumeric : public StackfuckFunc {
-    public:
-        virtual void operator() (Interpreter& i) const {
-            char c = getchar();
-            if(c >= '0' && c <= '9') {
-                i.program_stack.push(c - '0');
-            } else {
-                puts("Error! Non-numeric value entered!");
-                exit(1); 
-            }
-        }
-    };
-
-    class Output : public StackfuckFunc {
-    public:
-        virtual void operator() (Interpreter& i) const {
-            putchar(i.program_stack.top());
-        }
-    };
-
-    class Output : public StackfuckFunc {
-    public:
-        virtual void operator() (Interpreter& i) const {
-            printf("%ld", i.program_stack.top());
-        }
-    };
+std::stack<long>& StackfuckFunc::get_stack(Interpreter& i) const {
+    return i.program_stack;
 }
 
-Interpreter::DefinedFunctions = {
-    {'^', stackfuck_builtin::Add()}
+void Interpreter::run_command(char c) {
+    StackfuckFunc *func;
+    try {
+        func = Interpreter::DefinedFunctions.at(c);
+    } catch(std::out_of_range& e) { // functor does not exist
+        char text[] = "*** Stackfuck: invalid functor `?`.  Terminating...";
+        text[32] = c;
+        throw InvalidFunctor(text);
+    }
+
+    (*func)(*this);
+}
+
+void Interpreter::end_program() {
+    while(!program_stack.empty()) {
+        printf("%ld ", program_stack.top());
+        program_stack.pop();
+    }
+}
+
+const std::map<char, StackfuckFunc*> Interpreter::DefinedFunctions = {
+    {'^', new Increment()},
+    {'v', new Decrement()},
+    {'>', new Push_next()},
+    {'I', new Input()},
+    {'i', new InputNumeric()},
+    {'O', new Output()},
+    {'o', new OutputLiteral()},
 };
