@@ -1,5 +1,5 @@
 #include "interpreter.h"
-#include "basefunctors.h"
+#include "builtinfunctors.h"
 #include <stdexcept>
 
 unsigned int Interpreter::interpreter_instances = 0;
@@ -13,9 +13,7 @@ void Interpreter::run_command(char c) {
     try {
         func = Interpreter::DefinedFunctions.at(c);
     } catch(std::out_of_range& e) { // functor does not exist
-        char text[] = "*** Stackfuck: invalid functor `?`.  Terminating...";
-        text[32] = c;
-        throw InvalidFunctor(text);
+        throw InvalidFunctor(c);
     }
 
     (*func)(*this);
@@ -29,6 +27,7 @@ void Interpreter::end_program() {
 }
 
 const std::map<char, StackfuckFunc*> Interpreter::DefinedFunctions = {
+    // Base functors: 
     {'^', new Increment()},
     {'v', new Decrement()},
     {'>', new Push_next()},
@@ -36,4 +35,11 @@ const std::map<char, StackfuckFunc*> Interpreter::DefinedFunctions = {
     {'i', new InputNumeric()},
     {'O', new Output()},
     {'o', new OutputLiteral()},
+    {'!', new Pop()},
+
+    // Stack functors:
+    {'+', new Add()},
+    {'-', new Subtract()},
+    {'*', new Multiply()},
+    {'/', new Divide()},
 };
