@@ -23,8 +23,8 @@ public:
         this->program_stack.push(0);
     }
     static const std::map<char, StackfuckFunc*> DefinedFunctions;
-    ~Interpreter() {
-        if(interpreter_instances == 0) {
+    virtual ~Interpreter() {
+        if(--interpreter_instances == 0) {
             for(auto it = Interpreter::DefinedFunctions.begin();
                 it != Interpreter::DefinedFunctions.end(); it++) {
                     delete (*it).second;
