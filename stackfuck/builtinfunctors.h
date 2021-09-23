@@ -13,10 +13,6 @@ public:
     virtual void operator() (Interpreter& i) const {
         get_stack(i).top()++;
     }
-
-    virtual void whoami() const {
-        std::cout << "Increment\n";
-    }
 };
 
 class Decrement : public StackfuckFunc {
