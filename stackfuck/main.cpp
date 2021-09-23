@@ -35,9 +35,12 @@ int main(int argc, char *argv[]) {
         if(!ignore_char(c)) {
             try{
                 i.run_command(c);
-            } catch(const InvalidFunctor& e) {
+            } catch(const sf_base_exception& e) {
                 printf("%s\n", e.what());
                 return 1;
+            } catch(const std::exception& e) {
+                printf("Unkown error:\n%s\n", e.what());
+                return 2;
             }
         }
     }
