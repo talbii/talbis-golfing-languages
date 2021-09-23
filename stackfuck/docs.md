@@ -110,6 +110,8 @@ $ stackfuck [path_to_source_file]
 
 If you have a different compiler, modify Line 4 in the file, and change `g++` to whatever compiler you have (for example, `clang`).
 
+Note, in the examples I have supplied I use `.sf`. This is just out of convenience ("sf" spells "stackfuck" :), in reality the interpreter doesn't care about file extension, and as long as you supply valid UTF-8 characters then there will be no issue running files.
+
 ## Extending Stackfuck
 
 I designed this project to be modular, so adding new functors is very simple.
