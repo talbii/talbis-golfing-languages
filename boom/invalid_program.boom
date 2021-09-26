@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+    // print argv.
+
+    for(String s : argv) {
+        ch: str
+        for ch in s:
+            Utility::print_char(ch)
+    }
+
+    Utility *u = new Utility;
+
+    u->printLn();
+
+    xor eax, eax
+
+    delete u; # important!
+
+    RET
+}
+
+struct Utility  {
+
+    def printLn() -> None:
+        Console.WriteLn();
+
+    static {
+        fn print_char(c: char) {
+        putStr c
+        }
+    }
+};
+
+
+
+/* can you spot the different languages used? :) */
