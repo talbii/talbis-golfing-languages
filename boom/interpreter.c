@@ -24,32 +24,31 @@ __attribute__((noreturn)) void Halt(void);
 
 int main(int argc, char *argv[]) {
     if(argc == 1) { // just make sure I don't access argv[1]
-        puts("[Boom] Interpreting implicit empty source file.");
+        fputs("[Boom] Interpreting implicit empty source file.\n", stderr);
         Halt();
     }
 
     FILE* file = fopen(argv[1], "r");
 
     if(file == NULL) {
-        puts("[Boom] Error opening file.");
-        return 1;
+        fputs("[Boom] Error opening file.\n", stderr);
+        return EXIT_FAILURE;
     }
 
     char c;
 
     while((c = fgetc(file)) != EOF) {
         // if we are here then the input program has characters, which is invalid.
-        printf("[Boom] Invalid syntax: character `%c` at Line 1:1\n>    Perhaps try an empty program instead?", c);
-        return 1;
+        fprintf(stderr, "[Boom] Invalid syntax: character `%c` at Line 1:1\n>    Perhaps try an empty program instead?", c);
+        fclose(file);
+        return EXIT_FAILURE;
     }
 
     fclose(file);
 
     Halt();
-
-    return 0;
 }
 
 __attribute__((noreturn)) void Halt(void) {
-    for(;;) {}
+    for(;;) ;
 }
