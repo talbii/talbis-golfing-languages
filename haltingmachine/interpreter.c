@@ -20,7 +20,7 @@ an empty program is guranteed to halt, because that can be useful?
 
 */
 
-__attribute__((noreturn)) void Halt(void);
+__attribute__((noreturn)) void inf_loop(void);
 char* get_program(const char*);
 void fizzbuzz(void);
 
