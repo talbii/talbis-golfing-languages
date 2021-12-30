@@ -1,7 +1,7 @@
 import sys
 
 def inf_loop() -> None:
-    """ Calling this function will make the program halt. """
+    """ Calling this function will make the program run forever. """
     while(True):
         pass
 
