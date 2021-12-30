@@ -18,7 +18,7 @@ Features of Boom:
 - Small program size: a valid program takes exactly 0 bytes of your drive space.
 */
 
-__attribute__((noreturn)) void Halt(void);
+__attribute__((noreturn)) void inf_loop(void);
 
 #include <stdio.h>
 
