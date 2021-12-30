@@ -8,7 +8,7 @@ Boom is a simplified language. In fact, it is so simple that you already wrote a
 "" (empty string)
 ... which is the only valid one. A program with any characters will throw a syntax error.
 
-The empty program will halt :)
+The empty program will run forever :)
 ==============================
 Features of Boom:
 - Simplified, and easy to learn
@@ -46,9 +46,9 @@ int main(int argc, char *argv[]) {
 
     fclose(file);
 
-    Halt();
+    inf_loop();
 }
 
-__attribute__((noreturn)) void Halt(void) {
+__attribute__((noreturn)) void inf_loop(void) {
     for(;;) ;
 }
