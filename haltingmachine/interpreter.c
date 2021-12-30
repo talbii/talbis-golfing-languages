@@ -13,7 +13,7 @@ The available functions are:
 - +: Increment the Accumulator.
     - *: Multiply the Accumulator by a random number (2, chosen randomly using a dice roll; guranteed to be random)
     - ^: Power the accumulator by 2 (square it)
-- !(!!!): Halt.
+- !(!!!): Run forever (infinite loop).
 an empty program is guranteed to halt, because that can be useful?
 
 -- Yes, this is inspired (heavily) by HQ9+.
@@ -33,7 +33,7 @@ unsigned long long accumulator = 0;
 int main(int argc, char *argv[]) {
     if(argc == 1) { // just make sure I don't access argv[1]
         puts("[HaltingMachine] Interpreting implicit empty source file.");
-        Halt();
+        inf_loop();
     }
 
     FILE* file = fopen(argv[1], "r");
@@ -69,7 +69,9 @@ int main(int argc, char *argv[]) {
                 accumulator *= accumulator;
                 break;
             case '!':
-                Halt();
+                fclose(file);
+                free(program);
+                inf_loop();              
                 break;
             case ' ' :
             case '\t':
@@ -88,7 +90,7 @@ int main(int argc, char *argv[]) {
     if(i == 1 && line_counter == 1) {
         fclose(file);
         free(program);
-        Halt(); // empty program!
+        inf_loop(); // empty program!
     }
 
     fclose(file);
@@ -97,7 +99,7 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-__attribute__((noreturn)) void Halt(void) {
+__attribute__((noreturn)) void inf_loop(void) {
     for(;;) {}
 }
 
