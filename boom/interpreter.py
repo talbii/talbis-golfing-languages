@@ -1,6 +1,6 @@
 import sys
 
-def Halt() -> None:
+def inf_loop() -> None:
     """ Calling this function will make the program halt. """
     while(True):
         pass
@@ -21,7 +21,7 @@ def main():
         print(f"[Boom] Invalid syntax: character `{program[0]}` at Line 1:1\n>    Perhaps try an empty program instead?")
         return
     
-    Halt()
+    inf_loop()
 
 
 if(__name__ == "__main__"):
