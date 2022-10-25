@@ -14,7 +14,7 @@ The available functions are:
     - *: Multiply the Accumulator by a random number (2, chosen randomly using a dice roll; guranteed to be random)
     - ^: Power the accumulator by 2 (square it)
 - !(!!!): Run forever (infinite loop).
-an empty program is guranteed to halt, because that can be useful?
+an empty program is guranteed to loop forever, because that can be useful?
 
 -- Yes, this is inspired (heavily) by HQ9+.
 
